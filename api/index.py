@@ -14,7 +14,9 @@ def add():
     a = request.args.get('a', 0, type=int)
     b = request.args.get('b', 0, type=int)
     return str(a + b)
-
+@app.route('/api/test/123')
+def test():
+    return "嗨！這是test123發出的問候"
 # 功能 3: 天氣
 @app.route('/api/weather')
 def weather():
