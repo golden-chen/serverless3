@@ -107,7 +107,7 @@ div.mycontainer div {
         
         try {
             // 將城市名稱作為 Query Parameter 傳給後端
-            const res = await fetch(`/api/weather?city=${city}`);
+            const res = await fetch(`/api/weather1?city=${city}`);
             const data = await res.json();
             
             if (data.error) {
