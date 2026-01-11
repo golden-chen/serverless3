@@ -1,3 +1,13 @@
+<style>
+div.mycontainer {
+  width:100%;
+  overflow:auto;
+}
+div.mycontainer div {
+  width:33%;  
+  float:left;
+}
+</style>
 <hr>
 <h4>加法運算測試</h4>
 數字 A: <input type="number" id="numA" value="10">
@@ -17,9 +27,27 @@
         <div id="log">等待點擊按鈕...</div>
     </div>
 <hr>
-<h4>微服務 2：即時天氣查詢</h4>
-<button onclick="fetchWeather()">查詢台北天氣</button>
-<div id="weatherResult"></div>
+<div class="mycontainer">
+
+  <div style="background-color:#FFF4A3;">
+    <h4>微服務 1：即時天氣查詢</h4>
+    <button onclick="fetchWeather()">查詢台北天氣</button>
+    <div id="weatherResult"></div>
+  </div>
+  <div>
+    <h4>微服務 2：全球天氣查詢</h4>
+    <input type="text" id="cityInput" placeholder="請輸入城市英文 (如: Tokyo, London)">
+    <button onclick="fetchWeather1()">查詢天氣</button>
+    <div id="weatherResult1"></div>
+  </div>    
+  <div style="background-color:#D9EEE1;">
+    <h2>Rome</h2>
+    <p>Rome is the capital city of Italy.</p>
+    <p>Rome has over 4 million inhabitants.</p>
+  </div>
+
+</div>
+
 
 <script>
     async function fetchWeather() {
@@ -71,5 +99,31 @@
         const res = await fetch(`/api/add?a=${a}&b=${b}`);
         const text = await res.text();
         document.getElementById('calcResult').innerText = text;
+    }
+    async function fetchWeather1() {
+        const city = document.getElementById('cityInput').value || 'Taipei';
+        const display = document.getElementById('weatherResult1');
+        display.innerText = `正在查詢 ${city} 的天氣...`;
+        
+        try {
+            // 將城市名稱作為 Query Parameter 傳給後端
+            const res = await fetch(`/api/weather?city=${city}`);
+            const data = await res.json();
+            
+            if (data.error) {
+                display.innerHTML = `<span style="color:red">查詢失敗：${data.error}</span>`;
+            } else {
+                display.innerHTML = `
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <p>城市：<b>${data.city}</b></p>
+                        <p>溫度：<span style="font-size: 1.2em; color: #1565c0;">${data.temp}</span></p>
+                        <p>狀態：${data.desc}</p>
+                        <p>濕度：${data.humidity}</p>
+                    </div>
+                `;
+            }
+        } catch (err) {
+            display.innerText = "連線錯誤：" + err;
+        }
     }
   </script>
