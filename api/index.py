@@ -35,7 +35,7 @@ def weather():
 @app.route('/api/weather1')
 def weather1():
     # 取得前端傳來的城市名稱，預設為 Taipei
-    #city = request.args.get('city', 'Taipei')
+    city = request.args.get('city', 'Taipei')
     
     try:
         # 動態將城市名稱放入網址
