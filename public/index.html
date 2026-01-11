@@ -113,6 +113,18 @@ div.mycontainer div {
             if (data.error) {
                 display.innerHTML = `<span style="color:red">查詢失敗：${data.error}</span>`;
             } else {
+                // --- 自動變色邏輯 ---
+            const desc = data.desc.toLowerCase();
+            if (desc.includes('sunny') || desc.includes('clear')) {
+                body.style.backgroundColor = "#fff9c4"; // 暖黃色
+            } else if (desc.includes('cloud') || desc.includes('mist')) {
+                body.style.backgroundColor = "#eceff1"; // 淺灰色
+            } else if (desc.includes('rain') || desc.includes('shower')) {
+                body.style.backgroundColor = "#cfd8dc"; // 深藍灰色
+            } else {
+                body.style.backgroundColor = "#e3f2fd"; // 預設淺藍
+            }
+            // --------------------
                 display.innerHTML = `
                         <p>城市：<b>${data.city}</b></p>
                         <p>溫度：<span style="font-size: 1.2em; color: #1565c0;">${data.temp}</span></p>
