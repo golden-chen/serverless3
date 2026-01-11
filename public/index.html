@@ -34,7 +34,7 @@ div.mycontainer div {
     <button onclick="fetchWeather()">查詢台北天氣</button>
     <div id="weatherResult"></div>
   </div>
-  <div>
+  <div style="background-color:#e3f2fd;">
     <h4>微服務 2：全球天氣查詢</h4>
     <input type="text" id="cityInput" placeholder="請輸入城市英文 (如: Tokyo, London)">
     <button onclick="fetchWeather1()">查詢天氣</button>
@@ -101,7 +101,7 @@ div.mycontainer div {
         document.getElementById('calcResult').innerText = text;
     }
     async function fetchWeather1() {
-        const city = document.getElementById('cityInput').value || 'Taipei';
+        const city = document.getElementById('cityInput').value || 'Tokyo';
         const display = document.getElementById('weatherResult1');
         display.innerText = `正在查詢 ${city} 的天氣...`;
         
@@ -114,12 +114,12 @@ div.mycontainer div {
                 display.innerHTML = `<span style="color:red">查詢失敗：${data.error}</span>`;
             } else {
                 display.innerHTML = `
-                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    
                         <p>城市：<b>${data.city}</b></p>
                         <p>溫度：<span style="font-size: 1.2em; color: #1565c0;">${data.temp}</span></p>
                         <p>狀態：${data.desc}</p>
                         <p>濕度：${data.humidity}</p>
-                    </div>
+                    
                 `;
             }
         } catch (err) {
