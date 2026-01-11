@@ -47,11 +47,12 @@ def weather1():
             
         data = resp.json()
         current = data['current_condition'][0]
-        
+        # 取得天氣描述的關鍵字 (例如: Sunny, Cloudy, Rain)
+        weather_desc = current['weatherDesc'][0]['value']
         return jsonify({
             "city": city.capitalize(),
             "temp": f"{current['temp_C']}°C",
-            "desc": current['weatherDesc'][0]['value'],
+            "desc": weather_desc,
             "humidity": f"{current['humidity']}%"
         })
     except Exception as e:
