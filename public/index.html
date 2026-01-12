@@ -106,7 +106,8 @@ div.mycontainer div {
         const city = document.getElementById('cityInput').value || 'Tokyo';
         const display = document.getElementById('weatherResult1');
         display.innerText = `正在查詢 ${city} 的天氣...`;
-        
+        // 1. 在請求開始前，顯示轉圈圈或文字
+    //display.innerHTML = '<div class="loader">正在連線氣象衛星...</div>';
         try {
             // 將城市名稱作為 Query Parameter 傳給後端
             const res = await fetch(`/api/weather1?city=${city}`);
@@ -116,7 +117,14 @@ div.mycontainer div {
                 display.innerHTML = `<span style="color:red">查詢失敗：${data.error}</span>`;
             } else {
               // --- 自動變色邏輯 ---
+            
+            let icon = "🌡️"; 
             const desc = data.desc.toLowerCase();
+
+            if (desc.includes('sun')) icon = "☀️";
+            else if (desc.includes('cloud')) icon = "☁️";
+            else if (desc.includes('rain')) icon = "🌧️";
+            else if (desc.includes('snow')) icon = "❄️";  
             if (desc.includes('sunny') || desc.includes('clear')) {
                 body.style.backgroundColor = "#fff9c4"; // 暖黃色
             } else if (desc.includes('cloud') || desc.includes('mist')) {
@@ -128,6 +136,7 @@ div.mycontainer div {
             }
             // --------------------
                 display.innerHTML = `
+                        <div style="font-size: 3rem;">${icon}</div>
                         <p>城市：<b>${data.city}</b></p>
                         <p>溫度：<span style="font-size: 1.2em; color: #1565c0;">${data.temp}</span></p>
                         <p>狀態：${data.desc}</p>
