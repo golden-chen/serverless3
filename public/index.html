@@ -101,6 +101,7 @@ div.mycontainer div {
         document.getElementById('calcResult').innerText = text;
     }
     async function fetchWeather1() {
+        const body = document.body;
         const city = document.getElementById('cityInput').value || 'Tokyo';
         const display = document.getElementById('weatherResult1');
         display.innerText = `正在查詢 ${city} 的天氣...`;
