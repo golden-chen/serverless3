@@ -121,17 +121,14 @@ div.mycontainer div {
             let icon = "🌡️"; 
             const desc = data.desc.toLowerCase();
 
-            if (desc.includes('sun')) icon = "☀️";
-            else if (desc.includes('cloud')) icon = "☁️";
-            else if (desc.includes('rain')) icon = "🌧️";
-            else if (desc.includes('snow')) icon = "❄️";  
-            if (desc.includes('sunny') || desc.includes('clear')) {
+            
+            if (desc.includes('sunny') || desc.includes('clear')) {icon = "☀️";
                 body.style.backgroundColor = "#fff9c4"; // 暖黃色
-            } else if (desc.includes('cloud') || desc.includes('mist')) {
+            } else if (desc.includes('cloud') || desc.includes('mist')) {icon = "☁️";
                 body.style.backgroundColor = "#eceff1"; // 淺灰色
-            } else if (desc.includes('rain') || desc.includes('shower')) {
+            } else if (desc.includes('rain') || desc.includes('shower')) {icon = "🌧️";
                 body.style.backgroundColor = "#cfd8dc"; // 深藍灰色
-            } else {
+            } else {icon = "❄️";
                 body.style.backgroundColor = "#e3f2fd"; // 預設淺藍
             }
             // --------------------
