@@ -76,14 +76,14 @@
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 </style>
-
+<body>
 <div class="weather-card">
     <div class="search-box">
         <input type="text" id="cityInput" placeholder="輸入城市 (英文)...">
         <button onclick="fetchWeather2()">Go</button>
     </div>
     
-    <div id="weatherResult">
+    <div id="weatherResult2">
         <p>正在自動偵測當地氣候...</p>
         <div class="loader"></div>
     </div>
@@ -99,7 +99,7 @@ display.innerHTML = `
 async function fetchWeather2() {
         const body = document.body;
         const city = document.getElementById('cityInput').value || 'Tokyo';
-        const display = document.getElementById('weatherResult1');
+        const display = document.getElementById('weatherResult2');
         display.innerText = `正在查詢 ${city} 的天氣...`;
         // 1. 在請求開始前，顯示轉圈圈或文字
     //display.innerHTML = '<div class="loader">正在連線氣象衛星...</div>';
@@ -146,6 +146,7 @@ async function fetchWeather2() {
             display.innerText = "連線錯誤：" + err;
         }
                     }
-</script>    
+</script>  
+</body>
 // 同時更新背景漸層 (讓視覺更柔和)
 
