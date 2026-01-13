@@ -2,7 +2,7 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/weather", "destination": "/public/weather.html" },
-    { "source": "/", "destination": "/public/index.html" }
+    { "source": "/weather", "destination": "/weather.html" },
+    
   ]
 }
