@@ -80,7 +80,7 @@
 <div class="weather-card">
     <div class="search-box">
         <input type="text" id="cityInput" placeholder="輸入城市 (英文)...">
-        <button onclick="fetchWeather()">Go</button>
+        <button onclick="fetchWeather2()">Go</button>
     </div>
     
     <div id="weatherResult">
@@ -95,12 +95,57 @@ display.innerHTML = `
     <div class="desc">${data.desc}</div>
     <div style="font-size: 0.9rem; opacity: 0.8;">濕度: ${data.humidity}</div>
 `;
+<script>
+async function fetchWeather2() {
+        const body = document.body;
+        const city = document.getElementById('cityInput').value || 'Tokyo';
+        const display = document.getElementById('weatherResult1');
+        display.innerText = `正在查詢 ${city} 的天氣...`;
+        // 1. 在請求開始前，顯示轉圈圈或文字
+    //display.innerHTML = '<div class="loader">正在連線氣象衛星...</div>';
+        try {
+            // 將城市名稱作為 Query Parameter 傳給後端
+            const res = await fetch(`/api/weather1?city=${city}`);
+            const data = await res.json();
+            
+            if (data.error) {
+                display.innerHTML = `<span style="color:red">查詢失敗：${data.error}</span>`;
+            } else {
+              // --- 自動變色邏輯 ---
+            
+            let icon = "🌡️"; 
+            const desc = data.desc.toLowerCase();
 
+            
+            if (desc.includes('sunny') || desc.includes('clear')) {
+                icon = "☀️";
+                body.style.backgroundColor = "#fff9c4"; // 暖黃色
+                document.body.style.background = "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)";
+            } else if (desc.includes('cloud') || desc.includes('mist')) {
+                icon = "☁️";
+                body.style.backgroundColor = "#eceff1"; // 淺灰色
+            } else if (desc.includes('rain') || desc.includes('shower')) {
+                icon = "🌧️";
+                body.style.backgroundColor = "#cfd8dc"; // 深藍灰色
+                document.body.style.background = "linear-gradient(135deg, #606c88 0%, #3f4c6b 100%)";
+            } else {
+                icon = "❄️";
+                body.style.backgroundColor = "#e3f2fd"; // 預設淺藍
+                document.body.style.background = "linear-gradient(135deg, #e6e9f0 0%, #eef1f5 100%)";
+            }
+            // --------------------
+                display.innerHTML = `
+                        <div style="font-size: 3rem;">${icon}</div>
+                        <p>城市：<b>${data.city}</b></p>
+                        <p>溫度：<span style="font-size: 1.2em; color: #1565c0;">${data.temp}</span></p>
+                        <p>狀態：${data.desc}</p>
+                        <p>濕度：${data.humidity}</p>
+                `;
+            }
+        } catch (err) {
+            display.innerText = "連線錯誤：" + err;
+        }
+                    }
+</script>    
 // 同時更新背景漸層 (讓視覺更柔和)
-if (desc.includes('sun') || desc.includes('clear')) {
-    document.body.style.background = "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)";
-} else if (desc.includes('rain')) {
-    document.body.style.background = "linear-gradient(135deg, #606c88 0%, #3f4c6b 100%)";
-} else {
-    document.body.style.background = "linear-gradient(135deg, #e6e9f0 0%, #eef1f5 100%)";
-}
+
