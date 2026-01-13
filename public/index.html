@@ -7,6 +7,20 @@ div.mycontainer div {
   width:33%;  
   float:left;
 }
+  .start-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .start-btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
 </style>
 <body>
 <hr>
@@ -42,9 +56,8 @@ div.mycontainer div {
     <div id="weatherResult1"></div>
   </div>    
   <div style="background-color:#D9EEE1;">
-    <h2>Rome</h2>
-    <p>Rome is the capital city of Italy.</p>
-    <p>Rome has over 4 million inhabitants.</p>
+    <h4>氣象</h4>
+    <a href="/weather" class="start-btn">開啟天氣查詢系統</a>
   </div>
 
 </div>
