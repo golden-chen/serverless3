@@ -1,8 +1,14 @@
-
 {
+  "version": 2,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/weather", "destination": "/weather.html" },
-    
-  ]
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/weather",
+      "destination": "/weather.html"
+    }
+  ],
+  "cleanUrls": true
 }
